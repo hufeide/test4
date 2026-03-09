@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 40px;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 48px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .title {
+            font-size: 20px;
+            color: #666;
+            font-weight: 400;
+            margin-bottom: 48px;
+        }
+
+        .intro {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 48px;
+            white-space: pre-line;
+        }
+
+        .contact {
+            font-size: 14px;
+            color: #888;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .contact a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .contact a:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="name">你的名字</h1>
+        <p class="title">职位/头衔</p>
+
+        <div class="intro">
+            这里是你的一段简短介绍。
+            可以写你的背景、兴趣、或者任何你想让别人了解你的内容。
+            保持简洁，突出重点。
+        </div>
+
+        <div class="contact">
+            <a href="mailto:your@email.com">邮箱</a>
+            <a href="https://github.com/yourname">GitHub</a>
+            <a href="https://linkedin.com/in/yourname">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>

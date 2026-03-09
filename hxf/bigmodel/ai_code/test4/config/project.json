@@ -1,0 +1,13 @@
+{
+  "github": {
+    "user": "hufeide",
+    "repo": "test4",
+    "url": "https://github.com/hufeide/test4",
+    "token": ""
+  },
+  "project": {
+    "name": "test4",
+    "description": "我的项目",
+    "default_branch": "main"
+  }
+}

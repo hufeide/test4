@@ -78,7 +78,6 @@ export default {
     const loadSessions = async () => {
       loading.value = true;
       try {
-        await getAllChatMessages();
         const messages = await getAllChatMessages();
         const sessionsData = messages.reduce((acc, msg) => {
           const date = new Date(msg.timestamp).toLocaleDateString();

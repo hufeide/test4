@@ -65,7 +65,6 @@ export default {
     const isLoading = ref(false);
     const messagesContainer = ref(null);
     const inputRef = ref(null);
-    const messageCounter = ref(0);
 
     const formatDate = (timestamp) => {
       const date = new Date(timestamp);
@@ -96,11 +95,15 @@ export default {
       }
     };
 
+    const generateMessageId = () => {
+      return `${props.sessionId}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    };
+
     const saveMessageToDB = async (message) => {
       try {
         await addChatMessageToDB({
           ...message,
-          id: messageCounter.value++,
+          id: generateMessageId(),
           sessionId: props.sessionId
         });
       } catch (error) {
@@ -119,7 +122,7 @@ export default {
 
       // Add user message
       const userMessage = {
-        id: messageCounter.value++,
+        id: generateMessageId(),
         sender: 'user',
         text: text,
         timestamp: now
@@ -146,7 +149,7 @@ export default {
         const responseText = await callLLM(text, conversationHistory);
 
         const aiMessage = {
-          id: messageCounter.value++,
+          id: generateMessageId(),
           sender: 'ai',
           text: responseText,
           timestamp: Date.now()
@@ -161,7 +164,7 @@ export default {
         console.error('Error in chat:', error);
         // Add error message
         const errorMessage = {
-          id: messageCounter.value++,
+          id: generateMessageId(),
           sender: 'ai',
           text: `I'm having trouble responding right now. Error: ${error.message}`,
           timestamp: Date.now()

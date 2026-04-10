@@ -19,95 +19,80 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NeedHelpModal',
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    },
-    needType: {
-      type: String,
-      required: true
-    }
+<script setup lang="ts">
+import { ref, watch, computed } from 'vue';
+
+const props = defineProps<{
+  show: boolean;
+  needType: string;
+}>();
+
+const emit = defineEmits<{
+  (e: 'close'): void;
+}>();
+
+const showModal = ref(false);
+
+const helpContent = {
+  happiness: {
+    label: 'Happiness (❤️)',
+    reason: 'Neglect or loneliness causes happiness to decrease',
+    actions: 'Petting your pet, playing games together'
   },
-  emits: ['close'],
-  data() {
-    return {
-      showModal: false,
-      helpContent: {
-        happiness: {
-          label: 'Happiness (❤️)',
-          reason: 'Neglect or loneliness causes happiness to decrease',
-          actions: 'Petting your pet, playing games together'
-        },
-        hunger: {
-          label: 'Hunger (🍗)',
-          reason: 'Time passes and hunger naturally increases',
-          actions: 'Feeding your pet regularly'
-        },
-        health: {
-          label: 'Health (❤️)',
-          reason: 'Poor care or illness causes health to decrease',
-          actions: 'Providing proper care, giving medicine when needed'
-        },
-        energy: {
-          label: 'Energy (⚡)',
-          reason: 'Activity decreases energy, lack of sleep also affects it',
-          actions: 'Resting, putting pet to sleep'
-        },
-        sleep: {
-          label: 'Sleep (💤)',
-          reason: 'Activity and lack of rest decreases sleep need',
-          actions: 'Putting pet to bed, allowing rest'
-        },
-        play: {
-          label: 'Play (⚽)',
-          reason: 'No playtime causes play need to decrease',
-          actions: 'Playing games, using toys'
-        },
-        love: {
-          label: 'Love (💖)',
-          reason: 'Neglect or lack of affection causes love to decrease',
-          actions: 'Petting, showing affection'
-        },
-        chat: {
-          label: 'Chat (💬)',
-          reason: 'No conversation causes chat need to decrease',
-          actions: 'Talking to your pet'
-        },
-        knowledge: {
-          label: 'Knowledge (📚)',
-          reason: 'No learning causes knowledge to decrease',
-          actions: 'Learning new topics, reading'
-        }
-      }
-    };
+  hunger: {
+    label: 'Hunger (🍗)',
+    reason: 'Time passes and hunger naturally increases',
+    actions: 'Feeding your pet regularly'
   },
-  computed: {
-    needLabel() {
-      return this.helpContent[this.needType]?.label || this.needType;
-    },
-    reason() {
-      return this.helpContent[this.needType]?.reason || '';
-    },
-    actions() {
-      return this.helpContent[this.needType]?.actions || '';
-    }
+  health: {
+    label: 'Health (❤️)',
+    reason: 'Poor care or illness causes health to decrease',
+    actions: 'Providing proper care, giving medicine when needed'
   },
-  watch: {
-    show(newVal) {
-      this.showModal = newVal;
-    }
+  energy: {
+    label: 'Energy (⚡)',
+    reason: 'Activity decreases energy, lack of sleep also affects it',
+    actions: 'Resting, putting pet to sleep'
   },
-  methods: {
-    closeModal() {
-      this.showModal = false;
-      this.$emit('close');
-    }
+  sleep: {
+    label: 'Sleep (💤)',
+    reason: 'Activity and lack of rest decreases sleep need',
+    actions: 'Putting pet to bed, allowing rest'
+  },
+  play: {
+    label: 'Play (⚽)',
+    reason: 'No playtime causes play need to decrease',
+    actions: 'Playing games, using toys'
+  },
+  love: {
+    label: 'Love (💖)',
+    reason: 'Neglect or lack of affection causes love to decrease',
+    actions: 'Petting, showing affection'
+  },
+  chat: {
+    label: 'Chat (💬)',
+    reason: 'No conversation causes chat need to decrease',
+    actions: 'Talking to your pet'
+  },
+  knowledge: {
+    label: 'Knowledge (📚)',
+    reason: 'No learning causes knowledge to decrease',
+    actions: 'Learning new topics, reading'
   }
 };
+
+const needLabel = computed(() => helpContent[props.needType as keyof typeof helpContent]?.label || props.needType);
+const reason = computed(() => helpContent[props.needType as keyof typeof helpContent]?.reason || '');
+const actions = computed(() => helpContent[props.needType as keyof typeof helpContent]?.actions || '');
+
+watch(() => props.show, (newVal) => {
+  showModal.value = newVal;
+});
+
+function closeModal() {
+  showModal.value = false;
+  emit('close');
+}
 </script>
 
 <style scoped>
